@@ -31,17 +31,9 @@
     </ion-fab-button>
   </ion-fab>
   <ion-list>
-    <ion-item>
+    <ion-item *ngFor="let workout of workouts">
       <ion-checkbox slot="start"></ion-checkbox>
-      <ion-label>Workout 1 </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox slot="start"></ion-checkbox>
-      <ion-label>Workout 2</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox slot="start"></ion-checkbox>
-      <ion-label>Workout 3</ion-label>
+      <ion-label>{{workout.summary}}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
