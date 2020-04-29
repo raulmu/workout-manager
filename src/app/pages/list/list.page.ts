@@ -48,8 +48,11 @@ export class ListPage implements OnInit, OnDestroy {
   }
 
   removeWorkout(workout: Workout) {
-    console.log('remove');
     this.dataService.deleteWorkout(workout);
+  }
+
+  clearWorkouts(){
+    this.dataService.clearWorkouts();
   }
 
 }

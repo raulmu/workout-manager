@@ -30,6 +30,7 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  <ion-item *ngIf="workouts.length"><ion-button fill="clear" slot="end" (click)="clearWorkouts()">limpar</ion-button></ion-item>
   <ion-list>
     <ion-item *ngFor="let workout of workouts">
       <ion-checkbox slot="start" (ionChange)="updateWorkout(workout)" [(ngModel)]="workout.done"></ion-checkbox>

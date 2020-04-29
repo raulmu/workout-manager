@@ -63,4 +63,9 @@ export class LocalService {
     localStorage.setItem('workouts', JSON.stringify(this.workouts));
   }
 
+  clearWorkouts(){
+    this.workouts = [];
+    this.workoutsFetch();
+  }
+
 }
