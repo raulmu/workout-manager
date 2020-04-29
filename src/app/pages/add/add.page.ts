@@ -32,7 +32,7 @@ export class AddPage implements OnInit {
       id: null, 
       summary: this.summary, 
       done: false,
-      date: new Date()
+      order: this.dataService.workouts.length + 1
     };
     this.dataService.addWorkout(workout);
     this.savedMessage();

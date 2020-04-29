@@ -32,7 +32,7 @@
   </ion-fab>
   <ion-list>
     <ion-item *ngFor="let workout of workouts">
-      <ion-checkbox slot="start"></ion-checkbox>
+      <ion-checkbox slot="start" (ionChange)="updateWorkout(workout)" [(ngModel)]="workout.done"></ion-checkbox>
       <ion-label>{{workout.summary}}</ion-label>
     </ion-item>
   </ion-list>
