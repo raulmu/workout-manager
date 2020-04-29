@@ -27,6 +27,23 @@ export class LocalService {
     this.workoutsFetch();
   }
 
+  deleteWorkout(workout: Workout){
+    this.workouts = this.workouts.filter(x => x.id != workout.id);
+    this.updateWorkoutsOrderValue();
+    this.workoutsFetch();
+  }
+
+  updateWorkoutsOrderValue() {
+    let reorderWorkouts = [];
+    let order = 0;
+    this.workouts.forEach(element => {
+      order++;
+      element.order = order;
+      reorderWorkouts.push(element);
+    });
+    this.workouts = reorderWorkouts;
+  }
+
   provisoryIdGen(workout: Workout) {
     return this.stringToHash(workout.summary.trim() + workout.order);
   }

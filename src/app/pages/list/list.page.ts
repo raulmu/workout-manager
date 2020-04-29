@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { AddPage } from '../add/add.page';
 import { LocalService } from 'src/app/services/local.service';
+import { Workout } from 'src/app/model/workout.model';
 
 @Component({
   selector: 'app-list',
@@ -42,9 +43,13 @@ export class ListPage implements OnInit, OnDestroy {
     return await modal.present();
   }
 
-  updateWorkout(workout) {
-    console.log(workout);
+  updateWorkout(workout: Workout) {
     this.dataService.updateWorkout(workout);
+  }
+
+  removeWorkout(workout: Workout) {
+    console.log('remove');
+    this.dataService.deleteWorkout(workout);
   }
 
 }
