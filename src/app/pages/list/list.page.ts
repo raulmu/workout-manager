@@ -25,7 +25,6 @@ export class ListPage implements OnInit, OnDestroy {
     this.subscritions.add(
       this.dataService.workoutsSubject.subscribe(
         (workouts) => {
-          console.log(workouts);
           this.workouts = workouts;
         }
       ));
