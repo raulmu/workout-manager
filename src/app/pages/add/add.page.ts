@@ -42,7 +42,16 @@ export class AddPage implements OnInit {
   async savedMessage() {
     const toast = await this.toastController.create({
       message: 'O exercício foi salvo.',
-      duration: 2000
+      duration: 1500,
+      buttons: [
+        {
+          side: 'end',
+          icon: 'close-outline',
+          text: '',
+          handler: () => {
+          }
+        }
+      ]
     });
     toast.present();
   }
