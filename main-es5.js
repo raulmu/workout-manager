@@ -1063,6 +1063,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _pages_add_add_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! ./pages/add/add.module */
     "./src/app/pages/add/add.module.ts");
+    /* harmony import */
+
+
+    var _angular_service_worker__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    /*! @angular/service-worker */
+    "./node_modules/@angular/service-worker/fesm2015/service-worker.js");
+    /* harmony import */
+
+
+    var _environments_environment__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+    /*! ../environments/environment */
+    "./src/environments/environment.ts");
 
     var AppModule = function AppModule() {
       _classCallCheck(this, AppModule);
@@ -1071,7 +1083,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       declarations: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]],
       entryComponents: [_pages_add_add_page__WEBPACK_IMPORTED_MODULE_9__["AddPage"]],
-      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"], _pages_add_add_module__WEBPACK_IMPORTED_MODULE_10__["AddPageModule"]],
+      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"], _pages_add_add_module__WEBPACK_IMPORTED_MODULE_10__["AddPageModule"], _angular_service_worker__WEBPACK_IMPORTED_MODULE_11__["ServiceWorkerModule"].register('ngsw-worker.js', {
+        enabled: _environments_environment__WEBPACK_IMPORTED_MODULE_12__["environment"].production
+      })],
       providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], {
         provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"],
         useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"]
