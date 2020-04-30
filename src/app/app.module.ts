@@ -10,11 +10,13 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AddPage } from './pages/add/add.page';
 import { AddPageModule } from './pages/add/add.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [AddPage],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AddPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AddPageModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [
     StatusBar,
     SplashScreen,

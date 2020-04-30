@@ -8,7 +8,7 @@ This is the code of workout-manager my demo ionic 5 web pwa to manager workout s
 - https://trello.com/b/k9PrnUGm/workout-manager
 
 ## Live app
-- Link to the app (soon)
+- https://raulmu.github.io/workout-manager/
 
 ## Personal website
 - https://raulmu.github.io
