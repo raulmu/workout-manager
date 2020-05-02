@@ -12,6 +12,8 @@ import { Workout } from 'src/app/model/workout.model';
 export class AddPage implements OnInit {
 
   summary: string = '';
+  setsNum: number = 1;
+  repeatsNum: number = 8;
 
   constructor(
     private modalCtrl: ModalController, 
@@ -32,7 +34,9 @@ export class AddPage implements OnInit {
       id: null, 
       summary: this.summary, 
       done: false,
-      order: this.dataService.workouts.length + 1
+      order: this.dataService.workouts.length + 1,
+      repeatsNum: this.repeatsNum,
+      setsNum: this.setsNum
     };
     this.dataService.addWorkout(workout);
     this.savedMessage();
@@ -54,6 +58,16 @@ export class AddPage implements OnInit {
       ]
     });
     toast.present();
+  }
+
+  changeSetsNum(value: number) {
+    this.setsNum += value;
+    this.setsNum = this.setsNum > 1 ? this.setsNum : 1;
+  }
+
+  changeRepeatsNum(value: number) {
+    this.repeatsNum += value;
+    this.repeatsNum = this.repeatsNum > 1 ? this.repeatsNum : 1;
   }
 
 }

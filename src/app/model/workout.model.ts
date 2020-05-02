@@ -3,4 +3,6 @@ export interface Workout {
     summary: string;
     done: boolean;
     order: number;
+    setsNum: number;
+    repeatsNum: number;
 }

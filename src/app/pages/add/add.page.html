@@ -3,25 +3,53 @@
     <ion-title>Workout Manager</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content fullscreen>
+<ion-content fullscreen class="ion-padding-top">
   <ion-fab horizontal="end" vertical="top" slot="fixed">
     <ion-fab-button (click)="dismiss()" color="primary" size="small">
       <ion-icon name="arrow-back"></ion-icon>
     </ion-fab-button>
   </ion-fab>
   <ion-grid class="ion-margin-top">
-    <ion-row>
-      <ion-col class="ion-padding">
-          <ion-item class="ion-margin-top">
-            <ion-label position="floating">Preencha o Exercício</ion-label>
-            <ion-input [(ngModel)]="summary"></ion-input>
+    <ion-row class="ion-margin-top">
+      <ion-col class="ion-text-center" size="12">
+        <ion-list>
+          <ion-item>
+            <ion-label position="stacked">
+              Preencha o nome do exercício
+            </ion-label>
+            <ion-input [(ngModel)]="summary"></ion-input>          
           </ion-item>
+          <ion-item>
+            <ion-label position="stacked">
+              Preencha a quantidade de séries
+            </ion-label>
+            <ion-input type="number" [(ngModel)]="setsNum"></ion-input>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="3"><ion-button (click)="changeSetsNum(1)">+1</ion-button></ion-col>
+                <ion-col size="3"><ion-button (click)="changeSetsNum(2)">+2</ion-button></ion-col>
+                <ion-col size="3"><ion-button [disabled]="setsNum < 2" (click)="changeSetsNum(-1)">-1</ion-button></ion-col>
+                <ion-col size="3"><ion-button [disabled]="setsNum < 3" (click)="changeSetsNum(-2)">-2</ion-button></ion-col>
+              </ion-row>          
+            </ion-grid>                      
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">
+              Preencha a quantidade de repetições
+            </ion-label>
+            <ion-input type="number" [(ngModel)]="repeatsNum"></ion-input>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="3"><ion-button (click)="changeRepeatsNum(1)">+1</ion-button></ion-col>
+                <ion-col size="3"><ion-button (click)="changeRepeatsNum(5)">+5</ion-button></ion-col>
+                <ion-col size="3"><ion-button [disabled]="repeatsNum < 2" (click)="changeRepeatsNum(-1)">-1</ion-button></ion-col>
+                <ion-col size="3"><ion-button [disabled]="repeatsNum < 6" (click)="changeRepeatsNum(-5)">-5</ion-button></ion-col>
+              </ion-row>          
+            </ion-grid>
+          </ion-item>                    
+        </ion-list>
+        <ion-button class="ion-margin" [disabled]="!summary.length" round (click)="save()">Adicionar</ion-button>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col size="12" class="ion-text-center">
-          <ion-button [disabled]="!summary.length" round (click)="save()">Adicionar</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  </ion-grid>  
 </ion-content>
