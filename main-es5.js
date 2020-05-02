@@ -186,7 +186,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-title>Workout Manager</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content fullscreen>\n  <ion-fab horizontal=\"end\" vertical=\"top\" slot=\"fixed\">\n    <ion-fab-button (click)=\"dismiss()\" color=\"primary\" size=\"small\">\n      <ion-icon name=\"arrow-back\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n  <ion-grid class=\"ion-margin-top\">\n    <ion-row>\n      <ion-col class=\"ion-padding\">\n          <ion-item class=\"ion-margin-top\">\n            <ion-label position=\"floating\">Preencha o Exercício</ion-label>\n            <ion-input [(ngModel)]=\"summary\"></ion-input>\n          </ion-item>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col size=\"12\" class=\"ion-text-center\">\n          <ion-button [disabled]=\"!summary.length\" round (click)=\"save()\">Adicionar</ion-button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>\n";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-title>Workout Manager</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content fullscreen class=\"ion-padding-top\">\n  <ion-fab horizontal=\"end\" vertical=\"top\" slot=\"fixed\">\n    <ion-fab-button (click)=\"dismiss()\" color=\"primary\" size=\"small\">\n      <ion-icon name=\"arrow-back\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n  <ion-grid class=\"ion-margin-top\">\n    <ion-row class=\"ion-margin-top\">\n      <ion-col class=\"ion-text-center\" size=\"12\">\n        <ion-list>\n          <ion-item>\n            <ion-label position=\"stacked\">\n              Preencha o nome do exercício\n            </ion-label>\n            <ion-input [(ngModel)]=\"summary\"></ion-input>          \n          </ion-item>\n          <ion-item>\n            <ion-label position=\"stacked\">\n              Preencha a quantidade de séries\n            </ion-label>\n            <ion-input type=\"number\" [(ngModel)]=\"setsNum\"></ion-input>\n            <ion-grid>\n              <ion-row>\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum > 8\" (click)=\"changeSetsNum(1)\">+1</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum > 7\" (click)=\"changeSetsNum(2)\">+2</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum < 2\" (click)=\"changeSetsNum(-1)\">-1</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum < 3\" (click)=\"changeSetsNum(-2)\">-2</ion-button></ion-col>\n              </ion-row>          \n            </ion-grid>                      \n          </ion-item>\n          <ion-item>\n            <ion-label position=\"stacked\">\n              Preencha a quantidade de repetições\n            </ion-label>\n            <ion-input type=\"number\" [(ngModel)]=\"repeatsNum\"></ion-input>\n            <ion-grid>\n              <ion-row>\n                <ion-col size=\"3\"><ion-button (click)=\"changeRepeatsNum(1)\">+1</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button (click)=\"changeRepeatsNum(5)\">+5</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"repeatsNum < 2\" (click)=\"changeRepeatsNum(-1)\">-1</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"repeatsNum < 6\" (click)=\"changeRepeatsNum(-5)\">-5</ion-button></ion-col>\n              </ion-row>          \n            </ion-grid>\n          </ion-item>                    \n        </ion-list>\n        <ion-button class=\"ion-margin\" [disabled]=\"!summary.length\" round (click)=\"save()\">Adicionar</ion-button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>  \n</ion-content>";
     /***/
   },
 
@@ -1300,6 +1300,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.dataService = dataService;
         this.toastController = toastController;
         this.summary = '';
+        this.setsNum = 1;
+        this.repeatsNum = 8;
       }
 
       _createClass(AddPage, [{
@@ -1318,8 +1320,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var workout = {
             id: null,
             summary: this.summary,
-            done: false,
-            order: this.dataService.workouts.length + 1
+            done: 0,
+            order: this.dataService.workouts.length + 1,
+            repeatsNum: this.repeatsNum,
+            setsNum: this.setsNum
           };
           this.dataService.addWorkout(workout);
           this.savedMessage();
@@ -1357,6 +1361,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }
             }, _callee, this);
           }));
+        }
+      }, {
+        key: "changeSetsNum",
+        value: function changeSetsNum(value) {
+          this.setsNum += value;
+          this.setsNum = this.setsNum < 1 ? 1 : this.setsNum;
+          this.setsNum = this.setsNum > 9 ? 9 : this.setsNum;
+        }
+      }, {
+        key: "changeRepeatsNum",
+        value: function changeRepeatsNum(value) {
+          this.repeatsNum += value;
+          this.repeatsNum = this.repeatsNum > 1 ? this.repeatsNum : 1;
         }
       }]);
 
@@ -1428,8 +1445,52 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, LocalService);
 
         this.workoutsSubject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        this.demoWorkouts = [{
+          "id": "1",
+          "summary": "Supino reto",
+          "done": 0,
+          "order": 1,
+          "repeatsNum": 8,
+          "setsNum": 4
+        }, {
+          "id": "2",
+          "summary": "Supino inclinado",
+          "done": 0,
+          "order": 2,
+          "repeatsNum": 10,
+          "setsNum": 4
+        }, {
+          "id": "3",
+          "summary": "Paralelas",
+          "done": 0,
+          "order": 3,
+          "repeatsNum": 6,
+          "setsNum": 4
+        }, {
+          "id": "4",
+          "summary": "Crucifixo ou crossover",
+          "done": 0,
+          "order": 4,
+          "repeatsNum": 10,
+          "setsNum": 4
+        }, {
+          "id": "5",
+          "summary": "Abdominal no pulley",
+          "done": 0,
+          "order": 5,
+          "repeatsNum": 10,
+          "setsNum": 3
+        }, {
+          "id": "6",
+          "summary": "Abdominal com carga",
+          "done": 0,
+          "order": 6,
+          "repeatsNum": 10,
+          "setsNum": 3
+        }];
         this.workouts = JSON.parse(localStorage.getItem('workouts'));
-        this.workouts = this.workouts ? this.workouts : [];
+        localStorage.setItem('demo-workouts', JSON.stringify(this.demoWorkouts));
+        this.workouts = this.workouts ? this.workouts : JSON.parse(localStorage.getItem('demo-workouts'));
       }
 
       _createClass(LocalService, [{
@@ -1493,6 +1554,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           });
           this.workoutsSubject.next(this.workouts);
           localStorage.setItem('workouts', JSON.stringify(this.workouts));
+        }
+      }, {
+        key: "demonstrationsValue",
+        value: function demonstrationsValue() {
+          localStorage.removeItem('workouts');
+          this.workouts = JSON.parse(localStorage.getItem('demo-workouts'));
+          this.workouts = this.workouts ? this.workouts : [];
+          this.workoutsFetch();
         }
       }, {
         key: "clearWorkouts",
