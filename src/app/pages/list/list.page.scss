@@ -26,3 +26,11 @@
 #item-add {
   cursor: pointer;
 }
+
+#done-col {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+}

@@ -26,8 +26,8 @@
             <ion-input type="number" [(ngModel)]="setsNum"></ion-input>
             <ion-grid>
               <ion-row>
-                <ion-col size="3"><ion-button (click)="changeSetsNum(1)">+1</ion-button></ion-col>
-                <ion-col size="3"><ion-button (click)="changeSetsNum(2)">+2</ion-button></ion-col>
+                <ion-col size="3"><ion-button [disabled]="setsNum > 8" (click)="changeSetsNum(1)">+1</ion-button></ion-col>
+                <ion-col size="3"><ion-button [disabled]="setsNum > 7" (click)="changeSetsNum(2)">+2</ion-button></ion-col>
                 <ion-col size="3"><ion-button [disabled]="setsNum < 2" (click)="changeSetsNum(-1)">-1</ion-button></ion-col>
                 <ion-col size="3"><ion-button [disabled]="setsNum < 3" (click)="changeSetsNum(-2)">-2</ion-button></ion-col>
               </ion-row>          

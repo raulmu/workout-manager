@@ -10,11 +10,19 @@ export class LocalService {
   workouts: Workout[];
   workoutsSubject = new Subject<Workout[]>();
 
-  demoWorkouts = [{"id":"1459366701","summary":"Supino reto","done":false,"order":1,"repeatsNum":8,"setsNum":4},{"id":"922281826","summary":"Supino inclinado","done":false,"order":2,"repeatsNum":10,"setsNum":4},{"id":"2506175336","summary":"Paralelas","done":false,"order":3,"repeatsNum":6,"setsNum":4},{"id":"1890047782","summary":"Crucifixo ou crossover","done":false,"order":4,"repeatsNum":10,"setsNum":4},{"id":"2146980483","summary":"Abdominal no pulley","done":false,"order":5,"repeatsNum":10,"setsNum":3},{"id":"2951019810","summary":"Abdominal com carga","done":false,"order":6,"repeatsNum":10,"setsNum":3}];
+  demoWorkouts = [
+    {"id":"1","summary":"Supino reto","done":0,"order":1,"repeatsNum":8,"setsNum":4},
+    {"id":"2","summary":"Supino inclinado","done":0,"order":2,"repeatsNum":10,"setsNum":4},
+    {"id":"3","summary":"Paralelas","done":0,"order":3,"repeatsNum":6,"setsNum":4},
+    {"id":"4","summary":"Crucifixo ou crossover","done":0,"order":4,"repeatsNum":10,"setsNum":4},
+    {"id":"5","summary":"Abdominal no pulley","done":0,"order":5,"repeatsNum":10,"setsNum":3},
+    {"id":"6","summary":"Abdominal com carga","done":0,"order":6,"repeatsNum":10,"setsNum":3}
+  ];
 
   constructor() {
     this.workouts = JSON.parse(localStorage.getItem('workouts'));
-    this.workouts = this.workouts ? this.workouts : this.demoWorkouts;
+    localStorage.setItem('demo-workouts', JSON.stringify(this.demoWorkouts));
+    this.workouts = this.workouts ? this.workouts : JSON.parse(localStorage.getItem('demo-workouts'));
   }
 
   addWorkout(workout: Workout) {
@@ -65,8 +73,15 @@ export class LocalService {
     localStorage.setItem('workouts', JSON.stringify(this.workouts));
   }
 
+  demonstrationsValue() {
+    localStorage.removeItem('workouts');
+    this.workouts = JSON.parse(localStorage.getItem('demo-workouts'));
+    this.workouts = this.workouts ? this.workouts : [];
+    this.workoutsFetch();
+  }
+
   clearWorkouts(){
-    this.workouts = this.demoWorkouts;
+    this.workouts = [];
     this.workoutsFetch();
   }
 

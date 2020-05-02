@@ -1,7 +1,7 @@
 export interface Workout {
     id: string;
     summary: string;
-    done: boolean;
+    done: number;
     order: number;
     setsNum: number;
     repeatsNum: number;

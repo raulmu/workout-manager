@@ -33,7 +33,7 @@ export class AddPage implements OnInit {
     let workout: Workout = { 
       id: null, 
       summary: this.summary, 
-      done: false,
+      done: 0,
       order: this.dataService.workouts.length + 1,
       repeatsNum: this.repeatsNum,
       setsNum: this.setsNum
@@ -62,7 +62,8 @@ export class AddPage implements OnInit {
 
   changeSetsNum(value: number) {
     this.setsNum += value;
-    this.setsNum = this.setsNum > 1 ? this.setsNum : 1;
+    this.setsNum = this.setsNum < 1 ? 1 : this.setsNum;
+    this.setsNum = this.setsNum > 9 ? 9 : this.setsNum;
   }
 
   changeRepeatsNum(value: number) {

@@ -42,7 +42,10 @@ export class ListPage implements OnInit, OnDestroy {
     return await modal.present();
   }
 
-  updateWorkout(workout: Workout) {
+  updateWorkout(workout: Workout, value: number) {
+    workout.done+=value;
+    workout.done = workout.done < 0 ? 0 : workout.done;
+    workout.done = workout.done > workout.setsNum ? workout.setsNum : workout.done;
     this.dataService.updateWorkout(workout);
   }
 
@@ -53,5 +56,10 @@ export class ListPage implements OnInit, OnDestroy {
   clearWorkouts(){
     this.dataService.clearWorkouts();
   }
+  
+  demoWorkouts(){
+    this.dataService.demonstrationsValue();
+  }
 
 }
+
