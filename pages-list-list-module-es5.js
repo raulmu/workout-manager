@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-title>Workout Manager</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content fullscreen>\n  <ion-fab horizontal=\"center\" vertical=\"bottom\" slot=\"fixed\">\n    <ion-fab-button (click)=\"showAddModal()\" color=\"primary\" size=\"small\">\n      <ion-icon name=\"add\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n  <ion-item>\n    <ion-button fill=\"clear\" slot=\"end\" (click)=\"demoWorkouts()\">demo</ion-button>\n    <ion-button *ngIf=\"workouts.length\" fill=\"clear\" slot=\"end\" (click)=\"clearWorkouts()\">limpar</ion-button>\n  </ion-item>\n  <ion-grid class=\"ion-margin-bottom\">\n    <ion-row class=\"ion-margin-top ion-margin-bottom\">\n      <ion-col class=\"ion-text-center ion-margin-bottom\" size=\"12\" size-lg=\"6\" offset-lg=\"3\">\n        <ion-list>\n          <ion-item id=\"item-add\" *ngIf=\"!workouts.length\" (click)=\"showAddModal()\">\n            <ion-label><a>adicione um exercício</a></ion-label>\n          </ion-item>\n          <ion-item *ngFor=\"let workout of workouts\">\n            <ion-grid>\n              <ion-row class=\"ion-align-items-center\">\n                <ion-col id=\"done-col\" size=\"4\">\n                  <!-- ion-checkbox slot=\"start\" (ionChange)=\"updateWorkout(workout)\" [(ngModel)]=\"workout.done\"></ion-checkbox -->\n                    <ion-button [disabled]=\"workout.done == 0\" (click)=\"updateWorkout(workout,-1)\">-</ion-button>\n                    <ion-label>{{workout.done}}</ion-label>\n                    <ion-button [disabled]=\"workout.done == workout.setsNum\" (click)=\"updateWorkout(workout,1)\">+</ion-button>\n                </ion-col>\n                <ion-col size=\"6\">\n                  <ion-label>\n                    <h2>{{workout.summary}}</h2>\n                    <h3>séries: {{workout.done}}/{{workout.setsNum}} <ion-icon *ngIf=\"workout.done === workout.setsNum\" color=\"primary\" name=\"checkmark-circle\" slot=\"end\"></ion-icon></h3>\n                    <h3>repetições: {{workout.repeatsNum}}</h3>\n                  </ion-label>\n                </ion-col>\n                <ion-col size=\"2\">\n                  <ion-button fill=\"clear\" rounded (click)=\"removeWorkout(workout)\">\n                    <ion-icon name=\"trash\"></ion-icon>\n                  </ion-button>\n                </ion-col>\n              </ion-row>\n            </ion-grid>\n          </ion-item>\n        </ion-list>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-title>Workout Manager</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content fullscreen>\n  <ion-fab horizontal=\"center\" vertical=\"bottom\" slot=\"fixed\">\n    <ion-fab-button (click)=\"showAddModal()\" color=\"primary\" size=\"small\">\n      <ion-icon name=\"add\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n  <ion-item>\n    <ion-button fill=\"clear\" slot=\"end\" (click)=\"demoWorkouts()\">demo</ion-button>\n    <ion-button *ngIf=\"workouts.length\" fill=\"clear\" slot=\"end\" (click)=\"clearWorkouts()\">limpar</ion-button>\n  </ion-item>\n  <ion-grid class=\"ion-margin-bottom\">\n    <ion-row class=\"ion-margin-top ion-margin-bottom\">\n      <ion-col class=\"ion-text-center ion-margin-bottom\" size=\"12\" size-lg=\"6\" offset-lg=\"3\">\n        <ion-list>\n          <ion-item id=\"item-add\" *ngIf=\"!workouts.length\" (click)=\"showAddModal()\">\n            <ion-label><a>adicione um exercício</a></ion-label>\n          </ion-item>\n          <ion-item *ngFor=\"let workout of workouts\">\n            <ion-grid>\n              <ion-row class=\"ion-align-items-center\">\n                <ion-col id=\"done-col\" size=\"4\">\n                  <!-- ion-checkbox slot=\"start\" (ionChange)=\"updateWorkout(workout)\" [(ngModel)]=\"workout.done\"></ion-checkbox -->\n                    <ion-button [disabled]=\"workout.done == 0\" (click)=\"updateWorkout(workout,-1)\">-</ion-button>\n                    <ion-label>{{workout.done}}</ion-label>\n                    <ion-button [disabled]=\"workout.done == workout.setsNum\" (click)=\"updateWorkout(workout,1)\">+</ion-button>\n                </ion-col>\n                <ion-col size=\"6\">\n                  <ion-label>\n                    <h2>{{workout.summary}}</h2>\n                    <h3>séries: {{workout.done}}/{{workout.setsNum}} <ion-icon *ngIf=\"workout.done === workout.setsNum\" color=\"primary\" name=\"checkmark-circle\" slot=\"end\"></ion-icon></h3>\n                    <h3>repetições: {{workout.repeatsNum}}</h3>\n                  </ion-label>\n                </ion-col>\n                <ion-col size=\"2\">\n                  <ion-button fill=\"clear\" rounded (click)=\"showWorkout(workout)\">\n                    <ion-icon name=\"create\"></ion-icon>\n                  </ion-button>\n                  <ion-button fill=\"clear\" rounded (click)=\"removeWorkout(workout)\">\n                    <ion-icon name=\"trash\"></ion-icon>\n                  </ion-button>\n                </ion-col>\n              </ion-row>\n            </ion-grid>\n          </ion-item>\n        </ion-list>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>";
     /***/
   },
 
@@ -262,7 +262,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }, {
         key: "showAddModal",
-        value: function showAddModal() {
+        value: function showAddModal(workout) {
           return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
             var modal;
             return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -271,7 +271,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   case 0:
                     _context.next = 2;
                     return this.modalController.create({
-                      component: _add_add_page__WEBPACK_IMPORTED_MODULE_4__["AddPage"]
+                      component: _add_add_page__WEBPACK_IMPORTED_MODULE_4__["AddPage"],
+                      componentProps: {
+                        'workout': workout
+                      }
                     });
 
                   case 2:
@@ -312,6 +315,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "demoWorkouts",
         value: function demoWorkouts() {
           this.dataService.demonstrationsValue();
+        }
+      }, {
+        key: "showWorkout",
+        value: function showWorkout(workout) {
+          this.showAddModal(workout);
         }
       }]);
 

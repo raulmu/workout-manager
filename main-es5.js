@@ -186,7 +186,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-title>Workout Manager</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content fullscreen class=\"ion-padding-top\">\n  <ion-fab horizontal=\"end\" vertical=\"top\" slot=\"fixed\">\n    <ion-fab-button (click)=\"dismiss()\" color=\"primary\" size=\"small\">\n      <ion-icon name=\"arrow-back\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n  <ion-grid class=\"ion-margin-top\">\n    <ion-row class=\"ion-margin-top\">\n      <ion-col class=\"ion-text-center\" size=\"12\">\n        <ion-list>\n          <ion-item>\n            <ion-label position=\"stacked\">\n              Preencha o nome do exercício\n            </ion-label>\n            <ion-input [(ngModel)]=\"summary\"></ion-input>          \n          </ion-item>\n          <ion-item>\n            <ion-label position=\"stacked\">\n              Preencha a quantidade de séries\n            </ion-label>\n            <ion-input type=\"number\" [(ngModel)]=\"setsNum\"></ion-input>\n            <ion-grid>\n              <ion-row>\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum > 8\" (click)=\"changeSetsNum(1)\">+1</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum > 7\" (click)=\"changeSetsNum(2)\">+2</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum < 2\" (click)=\"changeSetsNum(-1)\">-1</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum < 3\" (click)=\"changeSetsNum(-2)\">-2</ion-button></ion-col>\n              </ion-row>          \n            </ion-grid>                      \n          </ion-item>\n          <ion-item>\n            <ion-label position=\"stacked\">\n              Preencha a quantidade de repetições\n            </ion-label>\n            <ion-input type=\"number\" [(ngModel)]=\"repeatsNum\"></ion-input>\n            <ion-grid>\n              <ion-row>\n                <ion-col size=\"3\"><ion-button (click)=\"changeRepeatsNum(1)\">+1</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button (click)=\"changeRepeatsNum(5)\">+5</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"repeatsNum < 2\" (click)=\"changeRepeatsNum(-1)\">-1</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"repeatsNum < 6\" (click)=\"changeRepeatsNum(-5)\">-5</ion-button></ion-col>\n              </ion-row>          \n            </ion-grid>\n          </ion-item>                    \n        </ion-list>\n        <ion-button class=\"ion-margin\" [disabled]=\"!summary.length\" round (click)=\"save()\">Adicionar</ion-button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>  \n</ion-content>";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-title>Workout Manager</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content fullscreen class=\"ion-padding-top\">\n  <ion-fab horizontal=\"end\" vertical=\"top\" slot=\"fixed\">\n    <ion-fab-button (click)=\"dismiss()\" color=\"primary\" size=\"small\">\n      <ion-icon name=\"arrow-back\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n  <ion-grid class=\"ion-margin-top\">\n    <ion-row class=\"ion-margin-top\">\n      <ion-col class=\"ion-text-center\" size=\"12\">\n        <ion-list>\n          <ion-item>\n            <ion-label position=\"stacked\">\n              Preencha o nome do exercício\n            </ion-label>\n            <ion-input [(ngModel)]=\"summary\"></ion-input>          \n          </ion-item>\n          <ion-item>\n            <ion-label position=\"stacked\">\n              Preencha a quantidade de séries\n            </ion-label>\n            <ion-input type=\"number\" [(ngModel)]=\"setsNum\"></ion-input>\n            <ion-grid>\n              <ion-row>\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum > 8\" (click)=\"changeSetsNum(1)\">+1</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum > 7\" (click)=\"changeSetsNum(2)\">+2</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum < 2\" (click)=\"changeSetsNum(-1)\">-1</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum < 3\" (click)=\"changeSetsNum(-2)\">-2</ion-button></ion-col>\n              </ion-row>          \n            </ion-grid>                      \n          </ion-item>\n          <ion-item>\n            <ion-label position=\"stacked\">\n              Preencha a quantidade de repetições\n            </ion-label>\n            <ion-input type=\"number\" [(ngModel)]=\"repeatsNum\"></ion-input>\n            <ion-grid>\n              <ion-row>\n                <ion-col size=\"3\"><ion-button (click)=\"changeRepeatsNum(1)\">+1</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button (click)=\"changeRepeatsNum(5)\">+5</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"repeatsNum < 2\" (click)=\"changeRepeatsNum(-1)\">-1</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"repeatsNum < 6\" (click)=\"changeRepeatsNum(-5)\">-5</ion-button></ion-col>\n              </ion-row>          \n            </ion-grid>\n          </ion-item>                    \n        </ion-list>\n        <ion-button class=\"ion-margin\" [disabled]=\"!summary.length\" round (click)=\"save()\">{{buttonText}}</ion-button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>  \n</ion-content>";
     /***/
   },
 
@@ -1302,11 +1302,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.summary = '';
         this.setsNum = 1;
         this.repeatsNum = 8;
+        this.buttonText = 'Adicionar';
       }
 
       _createClass(AddPage, [{
         key: "ngOnInit",
-        value: function ngOnInit() {}
+        value: function ngOnInit() {
+          if (this.workout) {
+            this.summary = this.workout.summary;
+            this.setsNum = this.workout.setsNum;
+            this.repeatsNum = this.workout.repeatsNum;
+            this.buttonText = 'Atualizar';
+          }
+
+          console.log(this.workout);
+        }
       }, {
         key: "dismiss",
         value: function dismiss() {
@@ -1325,7 +1335,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             repeatsNum: this.repeatsNum,
             setsNum: this.setsNum
           };
-          this.dataService.addWorkout(workout);
+
+          if (!this.workout) {
+            this.dataService.addWorkout(workout);
+          } else {
+            workout = this.workout;
+            workout.summary = this.summary;
+            workout.setsNum = this.setsNum;
+            workout.repeatsNum = this.repeatsNum;
+            this.dataService.updateWorkout(workout);
+          }
+
           this.savedMessage();
           this.dismiss();
         }
@@ -1390,6 +1410,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }];
     };
 
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)], AddPage.prototype, "workout", void 0);
     AddPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-add',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
