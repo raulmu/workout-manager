@@ -35,9 +35,12 @@ export class ListPage implements OnInit, OnDestroy {
     this.subscritions.unsubscribe();
   }
 
-  async showAddModal() {
+  async showAddModal(workout: Workout) {
     const modal = await this.modalController.create({
-      component: AddPage
+      component: AddPage,
+      componentProps: {
+        'workout': workout
+      }
     });
     return await modal.present();
   }
@@ -59,6 +62,10 @@ export class ListPage implements OnInit, OnDestroy {
   
   demoWorkouts(){
     this.dataService.demonstrationsValue();
+  }
+
+  showWorkout(workout: Workout) {
+    this.showAddModal(workout);
   }
 
 }

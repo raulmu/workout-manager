@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 
 import { LocalService } from 'src/app/services/local.service';
@@ -14,6 +14,8 @@ export class AddPage implements OnInit {
   summary: string = '';
   setsNum: number = 1;
   repeatsNum: number = 8;
+  buttonText = 'Adicionar';
+  @Input() workout: Workout;
 
   constructor(
     private modalCtrl: ModalController, 
@@ -21,6 +23,13 @@ export class AddPage implements OnInit {
     public toastController: ToastController ) { }
 
   ngOnInit() {
+    if(this.workout) {
+      this.summary = this.workout.summary;
+      this.setsNum = this.workout.setsNum;
+      this.repeatsNum = this.workout.repeatsNum;
+      this.buttonText = 'Atualizar';
+    }
+    console.log(this.workout);
   }
 
   dismiss() {
@@ -38,7 +47,15 @@ export class AddPage implements OnInit {
       repeatsNum: this.repeatsNum,
       setsNum: this.setsNum
     };
-    this.dataService.addWorkout(workout);
+    if(!this.workout){
+      this.dataService.addWorkout(workout);
+    } else {
+      workout = this.workout;
+      workout.summary = this.summary;
+      workout.setsNum = this.setsNum;
+      workout.repeatsNum = this.repeatsNum;
+      this.dataService.updateWorkout(workout);
+    }
     this.savedMessage();
     this.dismiss();
   }
