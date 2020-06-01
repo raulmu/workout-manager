@@ -42,11 +42,25 @@
               <ion-row>
                 <ion-col size="3"><ion-button (click)="changeRepeatsNum(1)">+1</ion-button></ion-col>
                 <ion-col size="3"><ion-button (click)="changeRepeatsNum(5)">+5</ion-button></ion-col>
-                <ion-col size="3"><ion-button [disabled]="repeatsNum < 2" (click)="changeRepeatsNum(-1)">-1</ion-button></ion-col>
-                <ion-col size="3"><ion-button [disabled]="repeatsNum < 6" (click)="changeRepeatsNum(-5)">-5</ion-button></ion-col>
+                <ion-col size="3"><ion-button [disabled]="repeatsNum < 1" (click)="changeRepeatsNum(-1)">-1</ion-button></ion-col>
+                <ion-col size="3"><ion-button [disabled]="repeatsNum < 5" (click)="changeRepeatsNum(-5)">-5</ion-button></ion-col>
               </ion-row>          
             </ion-grid>
-          </ion-item>                    
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">
+              Preencha a duração em segundos
+            </ion-label>
+            <ion-input type="number" [(ngModel)]="seconds"></ion-input>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="3"><ion-button (click)="changeSeconds(1)">+1</ion-button></ion-col>
+                <ion-col size="3"><ion-button (click)="changeSeconds(5)">+5</ion-button></ion-col>
+                <ion-col size="3"><ion-button [disabled]="seconds < 1" (click)="changeSeconds(-1)">-1</ion-button></ion-col>
+                <ion-col size="3"><ion-button [disabled]="seconds < 5" (click)="changeSeconds(-5)">-5</ion-button></ion-col>
+              </ion-row>          
+            </ion-grid>
+          </ion-item>                     
         </ion-list>
         <ion-button class="ion-margin" [disabled]="!summary.length" round (click)="save()">{{buttonText}}</ion-button>
       </ion-col>

@@ -23,17 +23,37 @@
           <ion-item *ngFor="let workout of workouts">
             <ion-grid>
               <ion-row class="ion-align-items-center">
-                <ion-col id="done-col" size="4">
-                  <!-- ion-checkbox slot="start" (ionChange)="updateWorkout(workout)" [(ngModel)]="workout.done"></ion-checkbox -->
-                    <ion-button [disabled]="workout.done == 0" (click)="updateWorkout(workout,-1)">-</ion-button>
-                    <ion-label>{{workout.done}}</ion-label>
-                    <ion-button [disabled]="workout.done == workout.setsNum" (click)="updateWorkout(workout,1)">+</ion-button>
+                <ion-col size="5">
+                    <ion-row>
+                      <ion-col id="done-col" size="12">
+                        <ion-button [disabled]="workout.done == 0" (click)="updateWorkout(workout,-1)">-</ion-button>
+                        <ion-label>{{workout.done}}</ion-label>
+                        <ion-button [disabled]="workout.done == workout.setsNum" (click)="updateWorkout(workout,1)">+</ion-button>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col id="play-col" size="12">
+                        <ion-button [disabled]="!isPlayingWorkout.length || isPlayingWorkout!=workout.id || workoutPaused.length" fill="clear" rounded (click)="pauseWorkout(workout)">
+                          <ion-icon name="pause"></ion-icon>
+                        </ion-button>
+                        <ion-button [disabled]="isPlayingWorkout.length && workoutPaused!=workout.id" fill="clear" rounded (click)="playWorkout(workout)">
+                          <ion-icon name="play"></ion-icon>
+                        </ion-button>
+                        <ion-button [disabled]="!isPlayingWorkout.length || isPlayingWorkout!=workout.id" fill="clear" rounded (click)="stopWorkout(workout)">
+                          <ion-icon name="stop"></ion-icon>
+                        </ion-button>
+                      </ion-col>
+                    </ion-row>
                 </ion-col>
-                <ion-col size="6">
+                <ion-col size="5">
                   <ion-label>
                     <h2>{{workout.summary}}</h2>
-                    <h3>séries: {{workout.done}}/{{workout.setsNum}} <ion-icon *ngIf="workout.done === workout.setsNum" color="primary" name="checkmark-circle" slot="end"></ion-icon></h3>
-                    <h3>repetições: {{workout.repeatsNum}}</h3>
+                    <h3>séries: {{ workout.setsNum ? workout.done +'/'+ workout.setsNum : '-'}} <ion-icon *ngIf="workout.done === workout.setsNum" color="primary" name="checkmark-circle" slot="end"></ion-icon></h3>
+                    <h3>repetições: {{workout.repeatsNum ? workout.repeatsNum : '-'}}</h3>
+                    <h3 *ngIf="!isPlayingWorkout.length || isPlayingWorkout!==workout.id; else elseSeconds">segundos: {{workout.seconds ? workout.seconds : '-'}}</h3>
+                    <ng-template #elseSeconds>
+                      <h3 class="seconds-play">segundos: {{workout.seconds}}</h3>
+                    </ng-template>
                   </ion-label>
                 </ion-col>
                 <ion-col size="2">

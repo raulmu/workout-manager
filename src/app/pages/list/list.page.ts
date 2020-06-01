@@ -17,6 +17,11 @@ export class ListPage implements OnInit, OnDestroy {
 
   workouts = [];
 
+  isPlayingWorkout = '';
+  workoutPaused = '';
+  secondsTotal = 0;
+  interval;
+
   subscritions = new Subscription();
 
   constructor(private modalController: ModalController, private dataService: LocalService) { }
@@ -66,6 +71,73 @@ export class ListPage implements OnInit, OnDestroy {
 
   showWorkout(workout: Workout) {
     this.showAddModal(workout);
+  }
+
+  playWorkout(workout: Workout){
+    const audio = new Audio();
+    const source = document.createElement("source");
+    this.isPlayingWorkout = workout.id;
+    this.workoutPaused = '';
+
+    source.setAttribute(
+      'src',
+      '../assets/sounds/beep-start.mp3'
+    );
+
+    source.setAttribute("type", "audio/mpeg");
+
+    audio.append(source);
+    audio.load();
+    audio.play();
+
+    this.secondsTotal = workout.seconds;
+    window.setTimeout(() => {
+      this.isPlayingWorkout = workout.id;
+      this.workoutPaused = '';
+      this.interval = window.setInterval(() => this.toDo(workout), 1000);
+    }, 3500);
+  }
+  
+  stopWorkout(workout: Workout) {
+    if(this.isPlayingWorkout === workout.id){
+      this.isPlayingWorkout = '';
+      window.clearInterval(this.interval);
+      workout.seconds = this.secondsTotal;
+    }
+  }
+
+  pauseWorkout(workout: Workout) {
+    if(this.isPlayingWorkout === workout.id){
+      this.workoutPaused = workout.id;
+      window.clearInterval(this.interval);
+    }    
+  }
+
+  toDo(workout: Workout) {
+    if (!workout.seconds) {      
+      const audio = new Audio();
+      const source = document.createElement("source");
+      // source.setAttribute(
+      //   "src",
+      //   "https://raw.githubusercontent.com/raulmu/angular-stopwatch/master/src/assets/sounds/trim-stop.mp3"
+      // );
+      source.setAttribute(
+        "src",
+        "../assets/sounds/trim-stop.mp3"
+      );
+      source.setAttribute("type", "audio/mpeg");
+      audio.append(source);
+      audio.load();
+      audio.play();
+      window.clearInterval(this.interval);
+      this.isPlayingWorkout = '';
+      workout.seconds = this.secondsTotal;
+      if(workout.done < workout.setsNum){
+        this.updateWorkout(workout, 1);
+      }
+    } else {
+      workout.seconds = workout.seconds - 1;
+    }
   }
 
 }

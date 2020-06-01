@@ -4,5 +4,6 @@ export interface Workout {
     done: number;
     order: number;
     setsNum: number;
-    repeatsNum: number;
+    repeatsNum?: number;
+    seconds?: number;
 }

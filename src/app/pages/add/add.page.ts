@@ -13,7 +13,8 @@ export class AddPage implements OnInit {
 
   summary: string = '';
   setsNum: number = 1;
-  repeatsNum: number = 8;
+  repeatsNum: number = 0;
+  seconds: number = 0;
   buttonText = 'Adicionar';
   @Input() workout: Workout;
 
@@ -27,6 +28,7 @@ export class AddPage implements OnInit {
       this.summary = this.workout.summary;
       this.setsNum = this.workout.setsNum;
       this.repeatsNum = this.workout.repeatsNum;
+      this.seconds = this.workout.seconds;
       this.buttonText = 'Atualizar';
     }
     console.log(this.workout);
@@ -45,7 +47,8 @@ export class AddPage implements OnInit {
       done: 0,
       order: this.dataService.workouts.length + 1,
       repeatsNum: this.repeatsNum,
-      setsNum: this.setsNum
+      setsNum: this.setsNum,
+      seconds: this.seconds
     };
     if(!this.workout){
       this.dataService.addWorkout(workout);
@@ -54,6 +57,7 @@ export class AddPage implements OnInit {
       workout.summary = this.summary;
       workout.setsNum = this.setsNum;
       workout.repeatsNum = this.repeatsNum;
+      workout.seconds = this.seconds;
       this.dataService.updateWorkout(workout);
     }
     this.savedMessage();
@@ -85,7 +89,12 @@ export class AddPage implements OnInit {
 
   changeRepeatsNum(value: number) {
     this.repeatsNum += value;
-    this.repeatsNum = this.repeatsNum > 1 ? this.repeatsNum : 1;
+    this.repeatsNum = this.repeatsNum > 0 ? this.repeatsNum : 0;
+  }
+
+  changeSeconds(value: number) {
+    this.seconds += value;
+    this.seconds = this.seconds > 0 ? this.seconds : 0;
   }
 
 }
