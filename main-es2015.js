@@ -438,7 +438,7 @@ module.exports = webpackAsyncContext;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n</ion-app>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n");
 
 /***/ }),
 
@@ -1248,7 +1248,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\gmdv\PublicProjects\workout-manager\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\raul\PrivateProjects\workout-manager\src\main.ts */"./src/main.ts");
 
 
 /***/ })
