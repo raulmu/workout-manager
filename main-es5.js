@@ -166,7 +166,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n";
+    __webpack_exports__["default"] = "<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n</ion-app>\r\n";
     /***/
   },
 
@@ -186,7 +186,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-title>Workout Manager</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content fullscreen class=\"ion-padding-top\">\n  <ion-fab horizontal=\"end\" vertical=\"top\" slot=\"fixed\">\n    <ion-fab-button (click)=\"dismiss()\" color=\"primary\" size=\"small\">\n      <ion-icon name=\"arrow-back\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n  <ion-grid class=\"ion-margin-top\">\n    <ion-row class=\"ion-margin-top\">\n      <ion-col class=\"ion-text-center\" size=\"12\">\n        <ion-list>\n          <ion-item>\n            <ion-label position=\"stacked\">\n              Preencha o nome do exercício\n            </ion-label>\n            <ion-input [(ngModel)]=\"summary\"></ion-input>          \n          </ion-item>\n          <ion-item>\n            <ion-label position=\"stacked\">\n              Preencha a quantidade de séries\n            </ion-label>\n            <ion-input type=\"number\" [(ngModel)]=\"setsNum\"></ion-input>\n            <ion-grid>\n              <ion-row>\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum > 8\" (click)=\"changeSetsNum(1)\">+1</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum > 7\" (click)=\"changeSetsNum(2)\">+2</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum < 2\" (click)=\"changeSetsNum(-1)\">-1</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum < 3\" (click)=\"changeSetsNum(-2)\">-2</ion-button></ion-col>\n              </ion-row>          \n            </ion-grid>                      \n          </ion-item>\n          <ion-item>\n            <ion-label position=\"stacked\">\n              Preencha a quantidade de repetições\n            </ion-label>\n            <ion-input type=\"number\" [(ngModel)]=\"repeatsNum\"></ion-input>\n            <ion-grid>\n              <ion-row>\n                <ion-col size=\"3\"><ion-button (click)=\"changeRepeatsNum(1)\">+1</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button (click)=\"changeRepeatsNum(5)\">+5</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"repeatsNum < 2\" (click)=\"changeRepeatsNum(-1)\">-1</ion-button></ion-col>\n                <ion-col size=\"3\"><ion-button [disabled]=\"repeatsNum < 6\" (click)=\"changeRepeatsNum(-5)\">-5</ion-button></ion-col>\n              </ion-row>          \n            </ion-grid>\n          </ion-item>                    \n        </ion-list>\n        <ion-button class=\"ion-margin\" [disabled]=\"!summary.length\" round (click)=\"save()\">{{buttonText}}</ion-button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>  \n</ion-content>";
+    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>Workout Manager</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content fullscreen class=\"ion-padding-top\">\r\n  <ion-fab horizontal=\"end\" vertical=\"top\" slot=\"fixed\">\r\n    <ion-fab-button (click)=\"dismiss()\" color=\"primary\" size=\"small\">\r\n      <ion-icon name=\"arrow-back\"></ion-icon>\r\n    </ion-fab-button>\r\n  </ion-fab>\r\n  <ion-grid class=\"ion-margin-top\">\r\n    <ion-row class=\"ion-margin-top\">\r\n      <ion-col class=\"ion-text-center\" size=\"12\">\r\n        <ion-list>\r\n          <ion-item>\r\n            <ion-label position=\"stacked\">\r\n              Preencha o nome do exercício\r\n            </ion-label>\r\n            <ion-input [(ngModel)]=\"summary\"></ion-input>          \r\n          </ion-item>\r\n          <ion-item>\r\n            <ion-label position=\"stacked\">\r\n              Preencha a quantidade de séries\r\n            </ion-label>\r\n            <ion-input type=\"number\" [(ngModel)]=\"setsNum\"></ion-input>\r\n            <ion-grid>\r\n              <ion-row>\r\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum > 8\" (click)=\"changeSetsNum(1)\">+1</ion-button></ion-col>\r\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum > 7\" (click)=\"changeSetsNum(2)\">+2</ion-button></ion-col>\r\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum < 2\" (click)=\"changeSetsNum(-1)\">-1</ion-button></ion-col>\r\n                <ion-col size=\"3\"><ion-button [disabled]=\"setsNum < 3\" (click)=\"changeSetsNum(-2)\">-2</ion-button></ion-col>\r\n              </ion-row>          \r\n            </ion-grid>                      \r\n          </ion-item>\r\n          <ion-item>\r\n            <ion-label position=\"stacked\">\r\n              Preencha a quantidade de repetições\r\n            </ion-label>\r\n            <ion-input type=\"number\" [(ngModel)]=\"repeatsNum\"></ion-input>\r\n            <ion-grid>\r\n              <ion-row>\r\n                <ion-col size=\"3\"><ion-button (click)=\"changeRepeatsNum(1)\">+1</ion-button></ion-col>\r\n                <ion-col size=\"3\"><ion-button (click)=\"changeRepeatsNum(5)\">+5</ion-button></ion-col>\r\n                <ion-col size=\"3\"><ion-button [disabled]=\"repeatsNum < 1\" (click)=\"changeRepeatsNum(-1)\">-1</ion-button></ion-col>\r\n                <ion-col size=\"3\"><ion-button [disabled]=\"repeatsNum < 5\" (click)=\"changeRepeatsNum(-5)\">-5</ion-button></ion-col>\r\n              </ion-row>          \r\n            </ion-grid>\r\n          </ion-item>\r\n          <ion-item>\r\n            <ion-label position=\"stacked\">\r\n              Preencha a duração em segundos\r\n            </ion-label>\r\n            <ion-input type=\"number\" [(ngModel)]=\"seconds\"></ion-input>\r\n            <ion-grid>\r\n              <ion-row>\r\n                <ion-col size=\"3\"><ion-button (click)=\"changeSeconds(1)\">+1</ion-button></ion-col>\r\n                <ion-col size=\"3\"><ion-button (click)=\"changeSeconds(5)\">+5</ion-button></ion-col>\r\n                <ion-col size=\"3\"><ion-button [disabled]=\"seconds < 1\" (click)=\"changeSeconds(-1)\">-1</ion-button></ion-col>\r\n                <ion-col size=\"3\"><ion-button [disabled]=\"seconds < 5\" (click)=\"changeSeconds(-5)\">-5</ion-button></ion-col>\r\n              </ion-row>          \r\n            </ion-grid>\r\n          </ion-item>                     \r\n        </ion-list>\r\n        <ion-button class=\"ion-margin\" [disabled]=\"!summary.length\" round (click)=\"save()\">{{buttonText}}</ion-button>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>  \r\n</ion-content>";
     /***/
   },
 
@@ -1301,7 +1301,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.toastController = toastController;
         this.summary = '';
         this.setsNum = 1;
-        this.repeatsNum = 8;
+        this.repeatsNum = 0;
+        this.seconds = 0;
         this.buttonText = 'Adicionar';
       }
 
@@ -1312,6 +1313,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this.summary = this.workout.summary;
             this.setsNum = this.workout.setsNum;
             this.repeatsNum = this.workout.repeatsNum;
+            this.seconds = this.workout.seconds;
             this.buttonText = 'Atualizar';
           }
 
@@ -1333,7 +1335,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             done: 0,
             order: this.dataService.workouts.length + 1,
             repeatsNum: this.repeatsNum,
-            setsNum: this.setsNum
+            setsNum: this.setsNum,
+            seconds: this.seconds
           };
 
           if (!this.workout) {
@@ -1343,6 +1346,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             workout.summary = this.summary;
             workout.setsNum = this.setsNum;
             workout.repeatsNum = this.repeatsNum;
+            workout.seconds = this.seconds;
             this.dataService.updateWorkout(workout);
           }
 
@@ -1393,7 +1397,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "changeRepeatsNum",
         value: function changeRepeatsNum(value) {
           this.repeatsNum += value;
-          this.repeatsNum = this.repeatsNum > 1 ? this.repeatsNum : 1;
+          this.repeatsNum = this.repeatsNum > 0 ? this.repeatsNum : 0;
+        }
+      }, {
+        key: "changeSeconds",
+        value: function changeSeconds(value) {
+          this.seconds += value;
+          this.seconds = this.seconds > 0 ? this.seconds : 0;
         }
       }]);
 
@@ -1465,49 +1475,119 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       function LocalService() {
         _classCallCheck(this, LocalService);
 
-        this.workoutsSubject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        this.workoutsSubject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"](); // demoWorkouts = [
+        //   {"id":"1","summary":"Supino reto","done":0,"order":1,"repeatsNum":8,"setsNum":4, "seconds": 40},
+        //   {"id":"2","summary":"Supino inclinado","done":0,"order":2,"repeatsNum":10,"setsNum":4, "seconds": 40},
+        //   {"id":"3","summary":"Paralelas","done":0,"order":3,"repeatsNum":6,"setsNum":4, "seconds": 40},
+        //   {"id":"4","summary":"Crucifixo ou crossover","done":0,"order":4,"repeatsNum":10,"setsNum":4, "seconds": 40},
+        //   {"id":"5","summary":"Abdominal no pulley","done":0,"order":5,"repeatsNum":10,"setsNum":3, "seconds": 40},
+        //   {"id":"6","summary":"Abdominal com carga","done":0,"order":6,"repeatsNum":10,"setsNum":3, "seconds": 40}
+        // ];
+
         this.demoWorkouts = [{
-          "id": "1",
-          "summary": "Supino reto",
+          "id": "1183690148",
+          "summary": "Cardio",
           "done": 0,
           "order": 1,
-          "repeatsNum": 8,
-          "setsNum": 4
+          "repeatsNum": 0,
+          "setsNum": 3,
+          "seconds": 30
         }, {
-          "id": "2",
-          "summary": "Supino inclinado",
+          "id": "4276131127",
+          "summary": "Abdominal 2/1",
           "done": 0,
           "order": 2,
-          "repeatsNum": 10,
-          "setsNum": 4
+          "repeatsNum": 0,
+          "setsNum": 3,
+          "seconds": 40
         }, {
-          "id": "3",
-          "summary": "Paralelas",
+          "id": "1057215337",
+          "summary": "Abdominal Pedalada",
           "done": 0,
           "order": 3,
-          "repeatsNum": 6,
-          "setsNum": 4
+          "repeatsNum": 0,
+          "setsNum": 3,
+          "seconds": 40
         }, {
-          "id": "4",
-          "summary": "Crucifixo ou crossover",
+          "id": "2729239836",
+          "summary": "Prancha Isométrica",
           "done": 0,
           "order": 4,
-          "repeatsNum": 10,
-          "setsNum": 4
+          "repeatsNum": 0,
+          "setsNum": 3,
+          "seconds": 40
         }, {
-          "id": "5",
-          "summary": "Abdominal no pulley",
+          "id": "2707350576",
+          "summary": "Abdominal Infra",
           "done": 0,
           "order": 5,
-          "repeatsNum": 10,
-          "setsNum": 3
+          "repeatsNum": 0,
+          "setsNum": 3,
+          "seconds": 40
         }, {
-          "id": "6",
-          "summary": "Abdominal com carga",
+          "id": "4275236009",
+          "summary": "Abdominal Power",
           "done": 0,
           "order": 6,
-          "repeatsNum": 10,
-          "setsNum": 3
+          "repeatsNum": 0,
+          "setsNum": 3,
+          "seconds": 40
+        }, {
+          "id": "3381693861",
+          "summary": "Cardio",
+          "done": 0,
+          "order": 7,
+          "repeatsNum": 0,
+          "setsNum": 3,
+          "seconds": 30
+        }, {
+          "id": "63297899",
+          "summary": "Abdominal 90",
+          "done": 0,
+          "order": 8,
+          "repeatsNum": 0,
+          "setsNum": 3,
+          "seconds": 40
+        }, {
+          "id": "533719211",
+          "summary": "Abdominal Feet TG",
+          "done": 0,
+          "order": 9,
+          "repeatsNum": 0,
+          "setsNum": 3,
+          "seconds": 40
+        }, {
+          "id": "3455780740",
+          "summary": "Prancha Isométrica",
+          "done": 0,
+          "order": 10,
+          "repeatsNum": 0,
+          "setsNum": 3,
+          "seconds": 40
+        }, {
+          "id": "3967829477",
+          "summary": "Canoa",
+          "done": 0,
+          "order": 11,
+          "repeatsNum": 0,
+          "setsNum": 3,
+          "seconds": 40
+        }, {
+          "id": "1843533744",
+          "summary": "Abdominal Remador",
+          "done": 0,
+          "order": 12,
+          "repeatsNum": 0,
+          "setsNum": 3,
+          "seconds": 40
+        }, {
+          "id": "3024340249",
+          "summary": "Cardio",
+          "done": 0,
+          "order": 13,
+          "repeatsNum": 0,
+          "setsNum": 3,
+          "seconds": 30
         }];
         this.workouts = JSON.parse(localStorage.getItem('workouts'));
         localStorage.setItem('demo-workouts', JSON.stringify(this.demoWorkouts));
@@ -1710,7 +1790,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /***/
   function _(module, exports, __webpack_require__) {
     module.exports = __webpack_require__(
-    /*! C:\Users\raul\PrivateProjects\workout-manager\src\main.ts */
+    /*! C:\Users\gmdv\PublicProjects\workout-manager\src\main.ts */
     "./src/main.ts");
     /***/
   }
