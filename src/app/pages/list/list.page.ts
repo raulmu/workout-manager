@@ -81,7 +81,7 @@ export class ListPage implements OnInit, OnDestroy {
 
     source.setAttribute(
       'src',
-      '../assets/sounds/beep-start.mp3'
+      './assets/sounds/beep-start.mp3'
     );
 
     source.setAttribute("type", "audio/mpeg");
@@ -117,13 +117,9 @@ export class ListPage implements OnInit, OnDestroy {
     if (!workout.seconds) {      
       const audio = new Audio();
       const source = document.createElement("source");
-      // source.setAttribute(
-      //   "src",
-      //   "https://raw.githubusercontent.com/raulmu/angular-stopwatch/master/src/assets/sounds/trim-stop.mp3"
-      // );
       source.setAttribute(
         "src",
-        "../assets/sounds/trim-stop.mp3"
+        "./assets/sounds/trim-stop.mp3"
       );
       source.setAttribute("type", "audio/mpeg");
       audio.append(source);
