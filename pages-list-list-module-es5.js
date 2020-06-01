@@ -333,7 +333,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var source = document.createElement("source");
           this.isPlayingWorkout = workout.id;
           this.workoutPaused = '';
-          source.setAttribute('src', 'assets/sounds/beep-start.mp3');
+          source.setAttribute('src', './assets/sounds/beep-start.mp3');
           source.setAttribute("type", "audio/mpeg");
           audio.append(source);
           audio.load();
@@ -370,7 +370,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (!workout.seconds) {
             var audio = new Audio();
             var source = document.createElement("source");
-            source.setAttribute("src", "assets/sounds/trim-stop.mp3");
+            source.setAttribute("src", "./assets/sounds/trim-stop.mp3");
             source.setAttribute("type", "audio/mpeg");
             audio.append(source);
             audio.load();

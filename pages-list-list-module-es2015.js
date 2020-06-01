@@ -181,7 +181,7 @@ let ListPage = class ListPage {
         const source = document.createElement("source");
         this.isPlayingWorkout = workout.id;
         this.workoutPaused = '';
-        source.setAttribute('src', 'assets/sounds/beep-start.mp3');
+        source.setAttribute('src', './assets/sounds/beep-start.mp3');
         source.setAttribute("type", "audio/mpeg");
         audio.append(source);
         audio.load();
@@ -210,7 +210,7 @@ let ListPage = class ListPage {
         if (!workout.seconds) {
             const audio = new Audio();
             const source = document.createElement("source");
-            source.setAttribute("src", "assets/sounds/trim-stop.mp3");
+            source.setAttribute("src", "./assets/sounds/trim-stop.mp3");
             source.setAttribute("type", "audio/mpeg");
             audio.append(source);
             audio.load();
