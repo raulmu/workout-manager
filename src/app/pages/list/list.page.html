@@ -36,7 +36,7 @@
                         <ion-button [disabled]="!isPlayingWorkout.length || isPlayingWorkout!=workout.id || workoutPaused.length" fill="clear" rounded (click)="pauseWorkout(workout)">
                           <ion-icon name="pause"></ion-icon>
                         </ion-button>
-                        <ion-button [disabled]="isPlayingWorkout.length && workoutPaused!=workout.id" fill="clear" rounded (click)="playWorkout(workout)">
+                        <ion-button [disabled]="!workout.seconds || (isPlayingWorkout.length && workoutPaused!=workout.id)" fill="clear" rounded (click)="playWorkout(workout)">
                           <ion-icon name="play"></ion-icon>
                         </ion-button>
                         <ion-button [disabled]="!isPlayingWorkout.length || isPlayingWorkout!=workout.id" fill="clear" rounded (click)="stopWorkout(workout)">
