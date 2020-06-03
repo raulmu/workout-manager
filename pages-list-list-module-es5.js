@@ -224,22 +224,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _add_add_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _services_google_analytics_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ../../services/google-analytics.service */
+    "./src/app/services/google-analytics.service.ts");
+    /* harmony import */
+
+
+    var _add_add_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ../add/add.page */
     "./src/app/pages/add/add.page.ts");
     /* harmony import */
 
 
-    var src_app_services_local_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var src_app_services_local_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! src/app/services/local.service */
     "./src/app/services/local.service.ts");
 
     var ListPage = /*#__PURE__*/function () {
-      function ListPage(modalController, dataService) {
+      function ListPage(modalController, dataService, googleAnalyticsService) {
         _classCallCheck(this, ListPage);
 
         this.modalController = modalController;
         this.dataService = dataService;
+        this.googleAnalyticsService = googleAnalyticsService;
         this.JSON = JSON;
         this.workouts = [];
         this.isPlayingWorkout = '';
@@ -272,23 +279,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               while (1) {
                 switch (_context.prev = _context.next) {
                   case 0:
-                    _context.next = 2;
+                    this.googleAnalyticsService.eventEmitter("click", "showAddModal", "Show Add Modal", 1);
+                    _context.next = 3;
                     return this.modalController.create({
-                      component: _add_add_page__WEBPACK_IMPORTED_MODULE_4__["AddPage"],
+                      component: _add_add_page__WEBPACK_IMPORTED_MODULE_5__["AddPage"],
                       componentProps: {
                         'workout': workout
                       }
                     });
 
-                  case 2:
+                  case 3:
                     modal = _context.sent;
-                    _context.next = 5;
+                    _context.next = 6;
                     return modal.present();
 
-                  case 5:
+                  case 6:
                     return _context.abrupt("return", _context.sent);
 
-                  case 6:
+                  case 7:
                   case "end":
                     return _context.stop();
                 }
@@ -307,21 +315,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "removeWorkout",
         value: function removeWorkout(workout) {
+          this.googleAnalyticsService.eventEmitter("click", "removeWorkout", "Remove a Workout", 1);
           this.dataService.deleteWorkout(workout);
         }
       }, {
         key: "clearWorkouts",
         value: function clearWorkouts() {
+          this.googleAnalyticsService.eventEmitter("click", "clearWorkouts", "Clear Workouts List", 1);
           this.dataService.clearWorkouts();
         }
       }, {
         key: "demoWorkouts",
         value: function demoWorkouts() {
+          this.googleAnalyticsService.eventEmitter("click", "demoWorkouts", "Load Demo Workouts List", 1);
           this.dataService.demonstrationsValue();
         }
       }, {
         key: "showWorkout",
         value: function showWorkout(workout) {
+          this.googleAnalyticsService.eventEmitter("click", "showWorkout", "Show Workout Details", 1);
           this.showAddModal(workout);
         }
       }, {
@@ -329,6 +341,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function playWorkout(workout) {
           var _this2 = this;
 
+          this.googleAnalyticsService.eventEmitter("click", "playWorkout", "Play a Workout", 1);
           var audio = new Audio();
           var source = document.createElement("source");
           this.isPlayingWorkout = workout.id;
@@ -350,6 +363,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "stopWorkout",
         value: function stopWorkout(workout) {
+          this.googleAnalyticsService.eventEmitter("click", "stopWorkout", "Stop a Workout", 1);
+
           if (this.isPlayingWorkout === workout.id) {
             this.isPlayingWorkout = '';
             window.clearInterval(this.interval);
@@ -359,6 +374,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "pauseWorkout",
         value: function pauseWorkout(workout) {
+          this.googleAnalyticsService.eventEmitter("click", "pauseWorkout", "Pause a Workout", 1);
+
           if (this.isPlayingWorkout === workout.id) {
             this.workoutPaused = workout.id;
             window.clearInterval(this.interval);
@@ -395,7 +412,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return [{
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]
       }, {
-        type: src_app_services_local_service__WEBPACK_IMPORTED_MODULE_5__["LocalService"]
+        type: src_app_services_local_service__WEBPACK_IMPORTED_MODULE_6__["LocalService"]
+      }, {
+        type: _services_google_analytics_service__WEBPACK_IMPORTED_MODULE_4__["GoogleAnalyticsService"]
       }];
     };
 
@@ -407,7 +426,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./list.page.scss */
       "./src/app/pages/list/list.page.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"], src_app_services_local_service__WEBPACK_IMPORTED_MODULE_5__["LocalService"]])], ListPage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"], src_app_services_local_service__WEBPACK_IMPORTED_MODULE_6__["LocalService"], _services_google_analytics_service__WEBPACK_IMPORTED_MODULE_4__["GoogleAnalyticsService"]])], ListPage);
     /***/
   }
 }]);

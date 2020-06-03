@@ -1027,7 +1027,6 @@ let AddPage = class AddPage {
             this.seconds = this.workout.seconds;
             this.buttonText = 'Atualizar';
         }
-        console.log(this.workout);
     }
     dismiss() {
         this.modalCtrl.dismiss({
@@ -1127,8 +1126,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 
 class GoogleAnalyticsService {
-    eventEmitter(eventName, eventCategory, eventAction, eventLabel = null, eventValue = null) {
-        gtag('event', eventName, {
+    eventEmitter(eventCategory, eventAction, eventLabel = null, eventValue = null) {
+        ga('send', 'event', {
             eventCategory: eventCategory,
             eventLabel: eventLabel,
             eventAction: eventAction,

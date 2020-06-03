@@ -119,8 +119,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-/* harmony import */ var _add_add_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../add/add.page */ "./src/app/pages/add/add.page.ts");
-/* harmony import */ var src_app_services_local_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/local.service */ "./src/app/services/local.service.ts");
+/* harmony import */ var _services_google_analytics_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/google-analytics.service */ "./src/app/services/google-analytics.service.ts");
+/* harmony import */ var _add_add_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../add/add.page */ "./src/app/pages/add/add.page.ts");
+/* harmony import */ var src_app_services_local_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/local.service */ "./src/app/services/local.service.ts");
+
 
 
 
@@ -128,9 +130,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ListPage = class ListPage {
-    constructor(modalController, dataService) {
+    constructor(modalController, dataService, googleAnalyticsService) {
         this.modalController = modalController;
         this.dataService = dataService;
+        this.googleAnalyticsService = googleAnalyticsService;
         this.JSON = JSON;
         this.workouts = [];
         this.isPlayingWorkout = '';
@@ -149,8 +152,11 @@ let ListPage = class ListPage {
     }
     showAddModal(workout) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            this
+                .googleAnalyticsService
+                .eventEmitter("click", "showAddModal", "Show Add Modal", 1);
             const modal = yield this.modalController.create({
-                component: _add_add_page__WEBPACK_IMPORTED_MODULE_4__["AddPage"],
+                component: _add_add_page__WEBPACK_IMPORTED_MODULE_5__["AddPage"],
                 componentProps: {
                     'workout': workout
                 }
@@ -165,18 +171,33 @@ let ListPage = class ListPage {
         this.dataService.updateWorkout(workout);
     }
     removeWorkout(workout) {
+        this
+            .googleAnalyticsService
+            .eventEmitter("click", "removeWorkout", "Remove a Workout", 1);
         this.dataService.deleteWorkout(workout);
     }
     clearWorkouts() {
+        this
+            .googleAnalyticsService
+            .eventEmitter("click", "clearWorkouts", "Clear Workouts List", 1);
         this.dataService.clearWorkouts();
     }
     demoWorkouts() {
+        this
+            .googleAnalyticsService
+            .eventEmitter("click", "demoWorkouts", "Load Demo Workouts List", 1);
         this.dataService.demonstrationsValue();
     }
     showWorkout(workout) {
+        this
+            .googleAnalyticsService
+            .eventEmitter("click", "showWorkout", "Show Workout Details", 1);
         this.showAddModal(workout);
     }
     playWorkout(workout) {
+        this
+            .googleAnalyticsService
+            .eventEmitter("click", "playWorkout", "Play a Workout", 1);
         const audio = new Audio();
         const source = document.createElement("source");
         this.isPlayingWorkout = workout.id;
@@ -194,6 +215,9 @@ let ListPage = class ListPage {
         }, 3500);
     }
     stopWorkout(workout) {
+        this
+            .googleAnalyticsService
+            .eventEmitter("click", "stopWorkout", "Stop a Workout", 1);
         if (this.isPlayingWorkout === workout.id) {
             this.isPlayingWorkout = '';
             window.clearInterval(this.interval);
@@ -201,6 +225,9 @@ let ListPage = class ListPage {
         }
     }
     pauseWorkout(workout) {
+        this
+            .googleAnalyticsService
+            .eventEmitter("click", "pauseWorkout", "Pause a Workout", 1);
         if (this.isPlayingWorkout === workout.id) {
             this.workoutPaused = workout.id;
             window.clearInterval(this.interval);
@@ -229,7 +256,8 @@ let ListPage = class ListPage {
 };
 ListPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
-    { type: src_app_services_local_service__WEBPACK_IMPORTED_MODULE_5__["LocalService"] }
+    { type: src_app_services_local_service__WEBPACK_IMPORTED_MODULE_6__["LocalService"] },
+    { type: _services_google_analytics_service__WEBPACK_IMPORTED_MODULE_4__["GoogleAnalyticsService"] }
 ];
 ListPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -237,7 +265,9 @@ ListPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./list.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/list/list.page.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./list.page.scss */ "./src/app/pages/list/list.page.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"], src_app_services_local_service__WEBPACK_IMPORTED_MODULE_5__["LocalService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"],
+        src_app_services_local_service__WEBPACK_IMPORTED_MODULE_6__["LocalService"],
+        _services_google_analytics_service__WEBPACK_IMPORTED_MODULE_4__["GoogleAnalyticsService"]])
 ], ListPage);
 
 

@@ -1349,8 +1349,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this.seconds = this.workout.seconds;
             this.buttonText = 'Atualizar';
           }
-
-          console.log(this.workout);
         }
       }, {
         key: "dismiss",
@@ -1499,10 +1497,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       _createClass(GoogleAnalyticsService, [{
         key: "eventEmitter",
-        value: function eventEmitter(eventName, eventCategory, eventAction) {
-          var eventLabel = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-          var eventValue = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-          gtag('event', eventName, {
+        value: function eventEmitter(eventCategory, eventAction) {
+          var eventLabel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+          var eventValue = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+          ga('send', 'event', {
             eventCategory: eventCategory,
             eventLabel: eventLabel,
             eventAction: eventAction,
