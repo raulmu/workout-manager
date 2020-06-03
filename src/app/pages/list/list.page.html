@@ -5,7 +5,7 @@
 </ion-header>
 <ion-content fullscreen>
   <ion-fab horizontal="center" vertical="bottom" slot="fixed">
-    <ion-fab-button (click)="showAddModal()" color="primary" size="small">
+    <ion-fab-button (click)="showAddModal(null)" color="primary" size="small">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -17,7 +17,7 @@
     <ion-row class="ion-margin-top ion-margin-bottom">
       <ion-col class="ion-text-center ion-margin-bottom" size="12" size-lg="6" offset-lg="3">
         <ion-list>
-          <ion-item id="item-add" *ngIf="!workouts.length" (click)="showAddModal()">
+          <ion-item id="item-add" *ngIf="!workouts.length" (click)="showAddModal(null)">
             <ion-label><a>adicione um exercício</a></ion-label>
           </ion-item>
           <ion-item *ngFor="let workout of workouts">
