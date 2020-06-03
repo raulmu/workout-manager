@@ -438,7 +438,7 @@ module.exports = webpackAsyncContext;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n</ion-app>\r\n");
 
 /***/ }),
 
@@ -777,17 +777,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
 /* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
 
 
 
 
 
 let AppComponent = class AppComponent {
-    constructor(platform, splashScreen, statusBar) {
+    constructor(platform, splashScreen, statusBar, router) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
+        this.router = router;
         this.initializeApp();
+        // this.router.events.subscribe(event => {
+        //   if (event instanceof NavigationEnd) {
+        //     gtag('config', 'UA-151224500-1',
+        //       {
+        //         'page_path': event.urlAfterRedirects
+        //       }
+        //     );
+        //   }
+        // });
+        // subscribe to router events and send page views to Google Analytics
+        this.router.events.subscribe(event => {
+            if (ga && ga.loaded) {
+                if (event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_5__["NavigationEnd"]) {
+                    ga('set', 'page', event.urlAfterRedirects);
+                    ga('send', 'pageview');
+                }
+            }
+        });
     }
     initializeApp() {
         this.platform.ready().then(() => {
@@ -799,7 +820,8 @@ let AppComponent = class AppComponent {
 AppComponent.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
     { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"] },
-    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] }
+    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] }
 ];
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -809,7 +831,8 @@ AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"],
         _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"],
-        _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]])
+        _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
 ], AppComponent);
 
 
@@ -839,6 +862,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_add_add_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/add/add.module */ "./src/app/pages/add/add.module.ts");
 /* harmony import */ var _angular_service_worker__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/service-worker */ "./node_modules/@angular/service-worker/fesm2015/service-worker.js");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _services_google_analytics_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./services/google-analytics.service */ "./src/app/services/google-analytics.service.ts");
+
 
 
 
@@ -862,7 +887,8 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         providers: [
             _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"],
-            { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] }
+            { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] },
+            _services_google_analytics_service__WEBPACK_IMPORTED_MODULE_13__["GoogleAnalyticsService"]
         ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
     })
@@ -1088,6 +1114,32 @@ AddPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/services/google-analytics.service.ts":
+/*!******************************************************!*\
+  !*** ./src/app/services/google-analytics.service.ts ***!
+  \******************************************************/
+/*! exports provided: GoogleAnalyticsService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GoogleAnalyticsService", function() { return GoogleAnalyticsService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+
+class GoogleAnalyticsService {
+    eventEmitter(eventName, eventCategory, eventAction, eventLabel = null, eventValue = null) {
+        gtag('event', eventName, {
+            eventCategory: eventCategory,
+            eventLabel: eventLabel,
+            eventAction: eventAction,
+            eventValue: eventValue
+        });
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/app/services/local.service.ts":
 /*!*******************************************!*\
   !*** ./src/app/services/local.service.ts ***!
@@ -1248,7 +1300,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\raul\PrivateProjects\workout-manager\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\gmdv\PublicProjects\workout-manager\src\main.ts */"./src/main.ts");
 
 
 /***/ })

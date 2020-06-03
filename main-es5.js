@@ -166,7 +166,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n";
+    __webpack_exports__["default"] = "<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n</ion-app>\r\n";
     /***/
   },
 
@@ -929,15 +929,40 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @ionic-native/status-bar/ngx */
     "./node_modules/@ionic-native/status-bar/ngx/index.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
 
     var AppComponent = /*#__PURE__*/function () {
-      function AppComponent(platform, splashScreen, statusBar) {
+      function AppComponent(platform, splashScreen, statusBar, router) {
         _classCallCheck(this, AppComponent);
 
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
-        this.initializeApp();
+        this.router = router;
+        this.initializeApp(); // this.router.events.subscribe(event => {
+        //   if (event instanceof NavigationEnd) {
+        //     gtag('config', 'UA-151224500-1',
+        //       {
+        //         'page_path': event.urlAfterRedirects
+        //       }
+        //     );
+        //   }
+        // });
+        // subscribe to router events and send page views to Google Analytics
+
+        this.router.events.subscribe(function (event) {
+          if (ga && ga.loaded) {
+            if (event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_5__["NavigationEnd"]) {
+              ga('set', 'page', event.urlAfterRedirects);
+              ga('send', 'pageview');
+            }
+          }
+        });
       }
 
       _createClass(AppComponent, [{
@@ -963,6 +988,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"]
       }, {
         type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]
       }];
     };
 
@@ -974,7 +1001,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./app.component.scss */
       "./src/app/app.component.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]])], AppComponent);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])], AppComponent);
     /***/
   },
 
@@ -1075,6 +1102,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _environments_environment__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! ../environments/environment */
     "./src/environments/environment.ts");
+    /* harmony import */
+
+
+    var _services_google_analytics_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+    /*! ./services/google-analytics.service */
+    "./src/app/services/google-analytics.service.ts");
 
     var AppModule = function AppModule() {
       _classCallCheck(this, AppModule);
@@ -1089,7 +1122,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], {
         provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"],
         useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"]
-      }],
+      }, _services_google_analytics_service__WEBPACK_IMPORTED_MODULE_13__["GoogleAnalyticsService"]],
       bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
     })], AppModule);
     /***/
@@ -1431,6 +1464,57 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       "./src/app/pages/add/add.page.scss"))["default"]]
     }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"], src_app_services_local_service__WEBPACK_IMPORTED_MODULE_3__["LocalService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"]])], AddPage);
     /***/
+  },
+
+  /***/
+  "./src/app/services/google-analytics.service.ts":
+  /*!******************************************************!*\
+    !*** ./src/app/services/google-analytics.service.ts ***!
+    \******************************************************/
+
+  /*! exports provided: GoogleAnalyticsService */
+
+  /***/
+  function srcAppServicesGoogleAnalyticsServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "GoogleAnalyticsService", function () {
+      return GoogleAnalyticsService;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+
+    var GoogleAnalyticsService = /*#__PURE__*/function () {
+      function GoogleAnalyticsService() {
+        _classCallCheck(this, GoogleAnalyticsService);
+      }
+
+      _createClass(GoogleAnalyticsService, [{
+        key: "eventEmitter",
+        value: function eventEmitter(eventName, eventCategory, eventAction) {
+          var eventLabel = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+          var eventValue = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+          gtag('event', eventName, {
+            eventCategory: eventCategory,
+            eventLabel: eventLabel,
+            eventAction: eventAction,
+            eventValue: eventValue
+          });
+        }
+      }]);
+
+      return GoogleAnalyticsService;
+    }();
+    /***/
+
   },
 
   /***/
@@ -1790,7 +1874,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /***/
   function _(module, exports, __webpack_require__) {
     module.exports = __webpack_require__(
-    /*! C:\Users\raul\PrivateProjects\workout-manager\src\main.ts */
+    /*! C:\Users\gmdv\PublicProjects\workout-manager\src\main.ts */
     "./src/main.ts");
     /***/
   }
