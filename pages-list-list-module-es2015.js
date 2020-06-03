@@ -152,9 +152,10 @@ let ListPage = class ListPage {
     }
     showAddModal(workout) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const type = !workout ? 'Create' : 'Edit';
             this
                 .googleAnalyticsService
-                .eventEmitter("click", "showAddModal", "Show Add Modal", 1);
+                .eventEmitter("click", "showAddModal" + type, "Show Add Modal", 1);
             const modal = yield this.modalController.create({
                 component: _add_add_page__WEBPACK_IMPORTED_MODULE_5__["AddPage"],
                 componentProps: {
@@ -189,9 +190,6 @@ let ListPage = class ListPage {
         this.dataService.demonstrationsValue();
     }
     showWorkout(workout) {
-        this
-            .googleAnalyticsService
-            .eventEmitter("click", "showWorkout", "Show Workout Details", 1);
         this.showAddModal(workout);
     }
     playWorkout(workout) {

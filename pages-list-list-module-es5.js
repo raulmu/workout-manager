@@ -274,13 +274,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "showAddModal",
         value: function showAddModal(workout) {
           return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-            var modal;
+            var type, modal;
             return regeneratorRuntime.wrap(function _callee$(_context) {
               while (1) {
                 switch (_context.prev = _context.next) {
                   case 0:
-                    this.googleAnalyticsService.eventEmitter("click", "showAddModal", "Show Add Modal", 1);
-                    _context.next = 3;
+                    type = !workout ? 'Create' : 'Edit';
+                    this.googleAnalyticsService.eventEmitter("click", "showAddModal" + type, "Show Add Modal", 1);
+                    _context.next = 4;
                     return this.modalController.create({
                       component: _add_add_page__WEBPACK_IMPORTED_MODULE_5__["AddPage"],
                       componentProps: {
@@ -288,15 +289,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       }
                     });
 
-                  case 3:
+                  case 4:
                     modal = _context.sent;
-                    _context.next = 6;
+                    _context.next = 7;
                     return modal.present();
 
-                  case 6:
+                  case 7:
                     return _context.abrupt("return", _context.sent);
 
-                  case 7:
+                  case 8:
                   case "end":
                     return _context.stop();
                 }
@@ -333,7 +334,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "showWorkout",
         value: function showWorkout(workout) {
-          this.googleAnalyticsService.eventEmitter("click", "showWorkout", "Show Workout Details", 1);
           this.showAddModal(workout);
         }
       }, {
