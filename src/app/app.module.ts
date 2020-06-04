@@ -13,6 +13,8 @@ import { AddPageModule } from './pages/add/add.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
+import { GoogleAnalyticsService } from './services/google-analytics.service';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [AddPage],
@@ -20,7 +22,8 @@ import { environment } from '../environments/environment';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    GoogleAnalyticsService
   ],
   bootstrap: [AppComponent]
 })

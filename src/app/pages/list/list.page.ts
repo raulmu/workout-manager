@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
+import { GoogleAnalyticsService } from '../../services/google-analytics.service';
 import { AddPage } from '../add/add.page';
 import { LocalService } from 'src/app/services/local.service';
 import { Workout } from 'src/app/model/workout.model';
@@ -24,7 +25,9 @@ export class ListPage implements OnInit, OnDestroy {
 
   subscritions = new Subscription();
 
-  constructor(private modalController: ModalController, private dataService: LocalService) { }
+  constructor(private modalController: ModalController, 
+    private dataService: LocalService,
+    private googleAnalyticsService: GoogleAnalyticsService) { }
 
   ngOnInit() {
     this.subscritions.add(
@@ -41,6 +44,10 @@ export class ListPage implements OnInit, OnDestroy {
   }
 
   async showAddModal(workout: Workout) {
+    const type = !workout ? 'Create' : 'Edit';
+    this
+    .googleAnalyticsService
+    .eventEmitter("click", "showAddModal"+type, "Show Add Modal", 1);
     const modal = await this.modalController.create({
       component: AddPage,
       componentProps: {
@@ -58,14 +65,23 @@ export class ListPage implements OnInit, OnDestroy {
   }
 
   removeWorkout(workout: Workout) {
+    this
+    .googleAnalyticsService
+    .eventEmitter("click", "removeWorkout", "Remove a Workout", 1);
     this.dataService.deleteWorkout(workout);
   }
 
   clearWorkouts(){
+    this
+    .googleAnalyticsService
+    .eventEmitter("click", "clearWorkouts", "Clear Workouts List", 1);
     this.dataService.clearWorkouts();
   }
   
   demoWorkouts(){
+    this
+    .googleAnalyticsService
+    .eventEmitter("click", "demoWorkouts", "Load Demo Workouts List", 1);
     this.dataService.demonstrationsValue();
   }
 
@@ -74,6 +90,9 @@ export class ListPage implements OnInit, OnDestroy {
   }
 
   playWorkout(workout: Workout){
+    this
+    .googleAnalyticsService
+    .eventEmitter("click", "playWorkout", "Play a Workout", 1);
     const audio = new Audio();
     const source = document.createElement("source");
     this.isPlayingWorkout = workout.id;
@@ -99,6 +118,9 @@ export class ListPage implements OnInit, OnDestroy {
   }
   
   stopWorkout(workout: Workout) {
+    this
+    .googleAnalyticsService
+    .eventEmitter("click", "stopWorkout", "Stop a Workout", 1);
     if(this.isPlayingWorkout === workout.id){
       this.isPlayingWorkout = '';
       window.clearInterval(this.interval);
@@ -107,6 +129,9 @@ export class ListPage implements OnInit, OnDestroy {
   }
 
   pauseWorkout(workout: Workout) {
+    this
+    .googleAnalyticsService
+    .eventEmitter("click", "pauseWorkout", "Pause a Workout", 1);
     if(this.isPlayingWorkout === workout.id){
       this.workoutPaused = workout.id;
       window.clearInterval(this.interval);

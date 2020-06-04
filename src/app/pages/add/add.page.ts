@@ -31,7 +31,6 @@ export class AddPage implements OnInit {
       this.seconds = this.workout.seconds;
       this.buttonText = 'Atualizar';
     }
-    console.log(this.workout);
   }
 
   dismiss() {
