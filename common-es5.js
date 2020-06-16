@@ -109,15 +109,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
 
   /***/
-  "./node_modules/@ionic/core/dist/esm/haptic-ccbda579.js":
+  "./node_modules/@ionic/core/dist/esm/haptic-da73c8fd.js":
   /*!**************************************************************!*\
-    !*** ./node_modules/@ionic/core/dist/esm/haptic-ccbda579.js ***!
+    !*** ./node_modules/@ionic/core/dist/esm/haptic-da73c8fd.js ***!
     \**************************************************************/
 
-  /*! exports provided: a, b, c, h */
+  /*! exports provided: a, b, c, d, h */
 
   /***/
-  function node_modulesIonicCoreDistEsmHapticCcbda579Js(module, __webpack_exports__, __webpack_require__) {
+  function node_modulesIonicCoreDistEsmHapticDa73c8fdJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
@@ -125,18 +125,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
     __webpack_require__.d(__webpack_exports__, "a", function () {
-      return hapticSelectionStart;
+      return hapticImpact;
     });
     /* harmony export (binding) */
 
 
     __webpack_require__.d(__webpack_exports__, "b", function () {
-      return hapticSelectionChanged;
+      return hapticSelectionStart;
     });
     /* harmony export (binding) */
 
 
     __webpack_require__.d(__webpack_exports__, "c", function () {
+      return hapticSelectionChanged;
+    });
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "d", function () {
       return hapticSelectionEnd;
     });
     /* harmony export (binding) */
@@ -145,23 +151,98 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     __webpack_require__.d(__webpack_exports__, "h", function () {
       return hapticSelection;
     });
-    /**
-     * Check to see if the Haptic Plugin is available
-     * @return Returns `true` or false if the plugin is available
-     */
 
+    var HapticEngine = {
+      getEngine: function getEngine() {
+        var win = window;
+        return win.TapticEngine || win.Capacitor && win.Capacitor.isPluginAvailable('Haptics') && win.Capacitor.Plugins.Haptics;
+      },
+      available: function available() {
+        return !!this.getEngine();
+      },
+      isCordova: function isCordova() {
+        return !!window.TapticEngine;
+      },
+      isCapacitor: function isCapacitor() {
+        var win = window;
+        return !!win.Capacitor;
+      },
+      impact: function impact(options) {
+        var engine = this.getEngine();
+
+        if (!engine) {
+          return;
+        }
+
+        var style = this.isCapacitor() ? options.style.toUpperCase() : options.style;
+        engine.impact({
+          style: style
+        });
+      },
+      notification: function notification(options) {
+        var engine = this.getEngine();
+
+        if (!engine) {
+          return;
+        }
+
+        var style = this.isCapacitor() ? options.style.toUpperCase() : options.style;
+        engine.notification({
+          style: style
+        });
+      },
+      selection: function selection() {
+        this.impact({
+          style: 'light'
+        });
+      },
+      selectionStart: function selectionStart() {
+        var engine = this.getEngine();
+
+        if (!engine) {
+          return;
+        }
+
+        if (this.isCapacitor()) {
+          engine.selectionStart();
+        } else {
+          engine.gestureSelectionStart();
+        }
+      },
+      selectionChanged: function selectionChanged() {
+        var engine = this.getEngine();
+
+        if (!engine) {
+          return;
+        }
+
+        if (this.isCapacitor()) {
+          engine.selectionChanged();
+        } else {
+          engine.gestureSelectionChanged();
+        }
+      },
+      selectionEnd: function selectionEnd() {
+        var engine = this.getEngine();
+
+        if (!engine) {
+          return;
+        }
+
+        if (this.isCapacitor()) {
+          engine.selectionChanged();
+        } else {
+          engine.gestureSelectionChanged();
+        }
+      }
+    };
     /**
      * Trigger a selection changed haptic event. Good for one-time events
      * (not for gestures)
      */
 
-
     var hapticSelection = function hapticSelection() {
-      var engine = window.TapticEngine;
-
-      if (engine) {
-        engine.selection();
-      }
+      HapticEngine.selection();
     };
     /**
      * Tell the haptic engine that a gesture for a selection change is starting.
@@ -169,11 +250,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
     var hapticSelectionStart = function hapticSelectionStart() {
-      var engine = window.TapticEngine;
-
-      if (engine) {
-        engine.gestureSelectionStart();
-      }
+      HapticEngine.selectionStart();
     };
     /**
      * Tell the haptic engine that a selection changed during a gesture.
@@ -181,11 +258,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
     var hapticSelectionChanged = function hapticSelectionChanged() {
-      var engine = window.TapticEngine;
-
-      if (engine) {
-        engine.gestureSelectionChanged();
-      }
+      HapticEngine.selectionChanged();
     };
     /**
      * Tell the haptic engine we are done with a gesture. This needs to be
@@ -194,168 +267,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
     var hapticSelectionEnd = function hapticSelectionEnd() {
-      var engine = window.TapticEngine;
+      HapticEngine.selectionEnd();
+    };
+    /**
+     * Use this to indicate success/failure/warning to the user.
+     * options should be of the type `{ style: 'light' }` (or `medium`/`heavy`)
+     */
 
-      if (engine) {
-        engine.gestureSelectionEnd();
-      }
+
+    var hapticImpact = function hapticImpact(options) {
+      HapticEngine.impact(options);
     };
     /***/
 
-  },
-
-  /***/
-  "./node_modules/@ionic/core/dist/esm/index-729ec402.js":
-  /*!*************************************************************!*\
-    !*** ./node_modules/@ionic/core/dist/esm/index-729ec402.js ***!
-    \*************************************************************/
-
-  /*! exports provided: s */
-
-  /***/
-  function node_modulesIonicCoreDistEsmIndex729ec402Js(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "s", function () {
-      return sanitizeDOMString;
-    });
-    /**
-     * Does a simple sanitization of all elements
-     * in an untrusted string
-     */
-
-
-    var sanitizeDOMString = function sanitizeDOMString(untrustedString) {
-      try {
-        if (typeof untrustedString !== 'string' || untrustedString === '') {
-          return untrustedString;
-        }
-        /**
-         * Create a document fragment
-         * separate from the main DOM,
-         * create a div to do our work in
-         */
-
-
-        var documentFragment = document.createDocumentFragment();
-        var workingDiv = document.createElement('div');
-        documentFragment.appendChild(workingDiv);
-        workingDiv.innerHTML = untrustedString;
-        /**
-         * Remove any elements
-         * that are blocked
-         */
-
-        blockedTags.forEach(function (blockedTag) {
-          var getElementsToRemove = documentFragment.querySelectorAll(blockedTag);
-
-          for (var elementIndex = getElementsToRemove.length - 1; elementIndex >= 0; elementIndex--) {
-            var element = getElementsToRemove[elementIndex];
-
-            if (element.parentNode) {
-              element.parentNode.removeChild(element);
-            } else {
-              documentFragment.removeChild(element);
-            }
-            /**
-             * We still need to sanitize
-             * the children of this element
-             * as they are left behind
-             */
-
-
-            var childElements = getElementChildren(element);
-            /* tslint:disable-next-line */
-
-            for (var childIndex = 0; childIndex < childElements.length; childIndex++) {
-              sanitizeElement(childElements[childIndex]);
-            }
-          }
-        });
-        /**
-         * Go through remaining elements and remove
-         * non-allowed attribs
-         */
-        // IE does not support .children on document fragments, only .childNodes
-
-        var dfChildren = getElementChildren(documentFragment);
-        /* tslint:disable-next-line */
-
-        for (var childIndex = 0; childIndex < dfChildren.length; childIndex++) {
-          sanitizeElement(dfChildren[childIndex]);
-        } // Append document fragment to div
-
-
-        var fragmentDiv = document.createElement('div');
-        fragmentDiv.appendChild(documentFragment); // First child is always the div we did our work in
-
-        var getInnerDiv = fragmentDiv.querySelector('div');
-        return getInnerDiv !== null ? getInnerDiv.innerHTML : fragmentDiv.innerHTML;
-      } catch (err) {
-        console.error(err);
-        return '';
-      }
-    };
-    /**
-     * Clean up current element based on allowed attributes
-     * and then recursively dig down into any child elements to
-     * clean those up as well
-     */
-
-
-    var sanitizeElement = function sanitizeElement(element) {
-      // IE uses childNodes, so ignore nodes that are not elements
-      if (element.nodeType && element.nodeType !== 1) {
-        return;
-      }
-
-      for (var i = element.attributes.length - 1; i >= 0; i--) {
-        var attribute = element.attributes.item(i);
-        var attributeName = attribute.name; // remove non-allowed attribs
-
-        if (!allowedAttributes.includes(attributeName.toLowerCase())) {
-          element.removeAttribute(attributeName);
-          continue;
-        } // clean up any allowed attribs
-        // that attempt to do any JS funny-business
-
-
-        var attributeValue = attribute.value;
-        /* tslint:disable-next-line */
-
-        if (attributeValue != null && attributeValue.toLowerCase().includes('javascript:')) {
-          element.removeAttribute(attributeName);
-        }
-      }
-      /**
-       * Sanitize any nested children
-       */
-
-
-      var childElements = getElementChildren(element);
-      /* tslint:disable-next-line */
-
-      for (var _i = 0; _i < childElements.length; _i++) {
-        sanitizeElement(childElements[_i]);
-      }
-    };
-    /**
-     * IE doesn't always support .children
-     * so we revert to .childNodes instead
-     */
-
-
-    var getElementChildren = function getElementChildren(el) {
-      return el.children != null ? el.children : el.childNodes;
-    };
-
-    var allowedAttributes = ['class', 'id', 'href', 'src', 'name', 'slot'];
-    var blockedTags = ['script', 'style', 'iframe', 'meta', 'link', 'object', 'embed'];
-    /***/
   },
 
   /***/
